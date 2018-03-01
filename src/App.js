@@ -5,6 +5,11 @@ import './login.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./login.js";
 import Map from "./maps.js";
+import Navbar2 from "./navbar";
+import 'bootstrap/dist/css/bootstrap.css';
+import axios from "axios";
+import Signin from './popup'
+
 
 
 
@@ -51,19 +56,29 @@ export const BasicExample = () => (
 );
 
 class App extends Component {
+
+  componentDidMount(){
+    axios.post("/insertUser").then((data)=>{
+      console.log(data);
+    })
+  }
+
   render() {
     return (
+      <div><Navbar2 />
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <img src={'http://twentynineinches.com/wp-content/uploads/2011/01/drive_train.image.+media+images+cycling+products+bikecomponents+CS+CS-M980_1200x900_v1_m56577569830716976_dot_png.bm.800.0.png'} className="App-logo" alt="logo" />
+          <h1 className="App-title">The Healthier Way to Ride to Work</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          Click on links above to get started.
         </p>
         <div>
           <Map />
-          <BasicExample />
+          <BasicExample /> 
+          <Signin />
+        </div>
         </div>
       </div>
     );
