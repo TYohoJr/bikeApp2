@@ -11,8 +11,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-  import Signin from './popup';
-  import Signup from './signup'
+  import Signin from '../signin/signin';
+  import Signup from '../signup/signup'
 
 export default class Navbar2 extends React.Component {
   constructor(props) {

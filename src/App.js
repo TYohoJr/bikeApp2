@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import './login.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from "./login.js";
-import Map from "./maps.js";
-import Navbar2 from "./navbar";
+import Map from "./maps/maps.js";
+import Navbar2 from "./navbar/navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from "axios";
-import Signin from './popup'
+import Signin from './signin/signin'
 
 
 

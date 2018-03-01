@@ -4,7 +4,6 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from "axios";
 
-
 class Signin extends React.Component {
   constructor(props) {
     super(props);
@@ -12,9 +11,8 @@ class Signin extends React.Component {
       modal: false,
       nestedModal: false,
       closeAll: false,
-        username: '',
-        password: ''
-
+      username: '',
+      password: '',
     };
 
     this.toggle = this.toggle.bind(this);
@@ -33,29 +31,18 @@ class Signin extends React.Component {
   }
 
   toggleNested() {
-     if(this.state.nestedModal == false){ 
-         axios.post('/signInData', {username: this.state.username, password: this.state.password}).then((result)=>{
-    })
-    this.setState({
-      nestedModal: !this.state.nestedModal,
-      closeAll: false,
-      userData: {
-          username: '',
-          password: ''
-      }
-    });
-    } else {
-    this.setState({
+    if(this.state.nestedModal === false){ 
+      axios.post('/signInData', {username: this.state.username, password: this.state.password}).then((result)=>{
+      })
+      this.setState({
         nestedModal: !this.state.nestedModal,
         closeAll: false,
         userData: {
-            username: '',
-            password: ''
+          username: '',
+          password: ''
         }
-    });
-}
-
-
+      });
+    }
   }
 
   toggleAll() {
@@ -90,11 +77,11 @@ class Signin extends React.Component {
             <br />
             <Button color="success" onClick={this.toggleNested}>Sign In</Button>
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
-              <ModalHeader>Nested Modal title</ModalHeader>
-              <ModalBody>Stuff and things</ModalBody>
+              <ModalHeader>Sign in was successful!</ModalHeader>
+              {/* <ModalBody>Stuff and things</ModalBody> */}
               <ModalFooter>
-                <Button color="primary" onClick={this.toggleNested}>Done</Button>{' '}
-                <Button color="secondary" onClick={this.toggleAll}>All Done</Button>
+                {/* <Button color="primary" onClick={this.toggleNested}>Done</Button>{' '} */}
+                <Button color="secondary" onClick={this.toggleAll}>Ok</Button>
               </ModalFooter>
             </Modal>
           </ModalBody>
