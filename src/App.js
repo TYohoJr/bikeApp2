@@ -20,7 +20,6 @@ class App extends Component {
         if (result.data === 'Login successful!') {
           this.setState({
            isMapPresent: true
-              
           })
         }
           resolve(result)

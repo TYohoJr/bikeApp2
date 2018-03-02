@@ -43,15 +43,6 @@ class Signup extends React.Component {
           }
         });
       })
-      // this.setState({
-      //   message: "test",
-      //   nestedModal: !this.state.nestedModal,
-      //   closeAll: false,
-      //   userData: {
-      //     username: '',
-      //     password: '',
-      //   }
-      // });
     } else {
       this.setState({
         nestedModal: !this.state.nestedModal,
@@ -99,15 +90,12 @@ class Signup extends React.Component {
             <Button color="success" onClick={this.toggleNested}>Sign Up</Button>
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>{this.state.message}</ModalHeader>
-              {/* <ModalBody>Stuff and things</ModalBody> */}
               <ModalFooter>
-                {/* <Button color="primary" onClick={this.toggleNested}>Done</Button>{' '} */}
                 <Button color="secondary" onClick={this.toggleAll}>Ok</Button>
               </ModalFooter>
             </Modal>
           </ModalBody>
           <ModalFooter>
-            {/* <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '} */}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
