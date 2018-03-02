@@ -3,8 +3,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from "axios";
-
-var message = ""
+import "./signup.css";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class Signup extends React.Component {
       closeAll: false,
       username: '',
       password: '',
+      message: ""
     };
 
     this.toggle = this.toggle.bind(this);
@@ -22,9 +22,7 @@ class Signup extends React.Component {
     this.toggleAll = this.toggleAll.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
-
-  
-}
+  }
 
   toggle() {
     this.setState({
@@ -33,29 +31,37 @@ class Signup extends React.Component {
   }
 
   toggleNested() {
-     if(this.state.nestedModal === false){ axios.post('/signUpData', {username: this.state.username, password: this.state.password}).then((result)=>{
-    })
-    message = "Sign up was successful!!!"
-    this.setState({
-      nestedModal: !this.state.nestedModal,
-      closeAll: false,
-      userData: {
-          username: '',
-          password: '',
-      }
-    });
+    if (this.state.nestedModal === false) {
+      axios.post('/signUpData', { username: this.state.username, password: this.state.password }).then((result) => {
+        this.setState({
+          message: result.data,
+          nestedModal: !this.state.nestedModal,
+          closeAll: false,
+          userData: {
+            username: '',
+            password: '',
+          }
+        });
+      })
+      // this.setState({
+      //   message: "test",
+      //   nestedModal: !this.state.nestedModal,
+      //   closeAll: false,
+      //   userData: {
+      //     username: '',
+      //     password: '',
+      //   }
+      // });
     } else {
-      message = "Sign up has failed"
-    this.setState({
+      this.setState({
         nestedModal: !this.state.nestedModal,
         closeAll: false,
         userData: {
-            username: '',
-            password: '',
-
+          username: '',
+          password: '',
         }
-    });
-}
+      });
+    }
 
 
   }
@@ -69,13 +75,13 @@ class Signup extends React.Component {
 
   onUserChange = (e) => {
     this.setState({
-        username: (e.target.value)
+      username: (e.target.value)
     });
   }
 
   onPasswordChange = (e) => {
     this.setState({
-        password: (e.target.value)
+      password: (e.target.value)
     });
   }
 
@@ -86,13 +92,13 @@ class Signup extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Welcome!</ModalHeader>
           <ModalBody>
-            <input type="text" name="username" placeholder= "Username" value={this.state.username} onChange={this.onUserChange} />
-            <input type="text" name="password" placeholder= "Password" value={this.state.password} onChange={this.onPasswordChange} />
+            <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.onUserChange} />
+            <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
 
             <br />
             <Button color="success" onClick={this.toggleNested}>Sign Up</Button>
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
-              <ModalHeader>{message}</ModalHeader>
+              <ModalHeader>{this.state.message}</ModalHeader>
               {/* <ModalBody>Stuff and things</ModalBody> */}
               <ModalFooter>
                 {/* <Button color="primary" onClick={this.toggleNested}>Done</Button>{' '} */}

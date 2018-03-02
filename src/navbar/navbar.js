@@ -11,23 +11,41 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-  import Signin from '../signin/signin';
-  import Signup from '../signup/signup'
+import Signin from '../signin/signin';
+import Signup from '../signup/signup';
+import "./navbar.css";
+import axios from 'axios';
 
 export default class Navbar2 extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
+    this.signIn=this.signIn.bind(this)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      test:"test"
     };
   }
+  signIn() {
+    axios.post('/signInData', { username: this.state.username, password: this.state.password }).then((result) => {
+      this.setState({
+        signInMessage: result.data,
+        nestedModal: !this.state.nestedModal,
+        closeAll: false,
+        userData: {
+          username: '',
+          password: ''
+        }
+      });
+    })
+  }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
     return (
       <div>
@@ -51,7 +69,7 @@ export default class Navbar2 extends React.Component {
                     <Signup/>
                   </DropdownItem>
                   <DropdownItem>
-                    <Signin/>
+                    <Signin signIn = {this.props.signIn} signInCheck={this.props.signInCheck}/>
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
