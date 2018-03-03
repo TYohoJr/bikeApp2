@@ -14,7 +14,8 @@ class Signup extends React.Component {
       closeAll: false,
       username: '',
       password: '',
-      message: ""
+      message: "",
+      work: ""
     };
 
     this.toggle = this.toggle.bind(this);
@@ -22,6 +23,7 @@ class Signup extends React.Component {
     this.toggleAll = this.toggleAll.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onWorkChange = this.onWorkChange.bind(this);
   }
 
   toggle() {
@@ -32,7 +34,7 @@ class Signup extends React.Component {
 
   toggleNested() {
     if (this.state.nestedModal === false) {
-      axios.post('/signUpData', { username: this.state.username, password: this.state.password }).then((result) => {
+      axios.post('/signUpData', { username: this.state.username, password: this.state.password, work: this.state.work }).then((result) => {
         this.setState({
           message: result.data,
           nestedModal: !this.state.nestedModal,
@@ -40,6 +42,7 @@ class Signup extends React.Component {
           userData: {
             username: '',
             password: '',
+            work:""
           }
         });
       })
@@ -50,6 +53,7 @@ class Signup extends React.Component {
         userData: {
           username: '',
           password: '',
+          work:""
         }
       });
     }
@@ -76,6 +80,12 @@ class Signup extends React.Component {
     });
   }
 
+  onWorkChange = (e) => {
+    this.setState({
+      work: (e.target.value)
+    });
+  }
+
   render() {
     return (
       <div>
@@ -85,6 +95,7 @@ class Signup extends React.Component {
           <ModalBody>
             <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.onUserChange} />
             <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
+            <input type="text" name="work" placeholder="Work Address" value={this.state.work} onChange={this.onWorkChange} />
 
             <br />
             <Button color="success" onClick={this.toggleNested}>Sign Up</Button>

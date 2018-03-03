@@ -11,15 +11,18 @@ class App extends Component {
     this.signIn = this.signIn.bind(this)
     this.state = {
       signInCheck: 'hidden',
-      isMapPresent: false
+      isMapPresent: false,
+      userWork: "bozeman"
     }
   }
   signIn(username, password) {
     return new Promise((resolve, reject) => {
-      axios.post('/signInData', { username: username, password: password }).then((result) => {
-        if (result.data === 'Login successful!') {
+      axios.post('/signInData', { username: username, password: password}).then((result) => {
+        if (result.data.message === 'Login successful!') {
+          console.log(result)
           this.setState({
-           isMapPresent: true
+           isMapPresent: true,
+           userWork:result.data.user.work
           })
         }
           resolve(result)
@@ -30,7 +33,7 @@ class App extends Component {
   render() {
     var map
     if (this.state.isMapPresent === true) {
-      map = <Map />
+      map = <Map userWork = {this.state.userWork}/>
     } 
 
     return (
