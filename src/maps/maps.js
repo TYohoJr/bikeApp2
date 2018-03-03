@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./maps.css"
-var pos = require("./maps2.js")
 
 const google = window.google;
 var map, infoWindow;

@@ -21,6 +21,7 @@ export default class Navbar2 extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.signIn=this.signIn.bind(this)
+    this.logOut=this.logOut.bind(this);
     this.state = {
       isOpen: false,
       test:"test"
@@ -44,6 +45,10 @@ export default class Navbar2 extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  logOut() {
+    window.location.href = '/xx'
   }
 
   render() {
@@ -73,7 +78,7 @@ export default class Navbar2 extends React.Component {
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    Log Out
+                    <button onClick={this.logOut}>Log Out</button>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
