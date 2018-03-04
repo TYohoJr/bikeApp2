@@ -33,7 +33,6 @@ export default class Signin extends React.Component {
   }
 
   toggleNested() {
-    // axios.post('/signInData', { username: this.state.username, password: this.state.password }).then((result) => {
     this.props.signIn(this.state.username, this.state.password).then((result) => {
       this.setState({
         signInMessage: result.data,
