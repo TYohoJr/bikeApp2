@@ -5,7 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from "axios";
 import "./signup.css";
 
-class Signup extends React.Component {
+export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,8 +53,6 @@ class Signup extends React.Component {
         }
       });
     }
-
-
   }
 
   toggleAll() {
@@ -78,16 +76,22 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button onClick={this.toggle}>Sign Up{this.props.buttonLabel}</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+      <div >
+        <Button id="signUpBtn" onClick={this.toggle}>Sign Up{this.props.buttonLabel}</Button>
+        <Modal id="signUpModal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Welcome!</ModalHeader>
           <ModalBody>
-            <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.onUserChange} />
-            <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
-
-            <br />
-            <Button color="success" onClick={this.toggleNested}>Sign Up</Button>
+            <div id="inputFieldSignUp">
+              <b className="usernameText">Username:</b><br />
+              <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.onUserChange} />
+              <br />
+              <br />
+              <b>Password:</b>
+              <br />
+              <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
+              <br />
+            </div>
+            {/* <Button color="success" onClick={this.toggleNested}>Sign Up</Button> */}
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>{this.state.message}</ModalHeader>
               <ModalFooter>
@@ -96,12 +100,11 @@ class Signup extends React.Component {
             </Modal>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          <Button color="success" onClick={this.toggleNested}>Sign Up</Button>
+            {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
           </ModalFooter>
         </Modal>
       </div>
     );
   }
 }
-
-export default Signup;

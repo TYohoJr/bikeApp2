@@ -3,3 +3,15 @@
     width:50%;
     margin:auto;
 }
+
+#start {
+    padding-bottom: 10px;
+}
+
+#end {
+    text-align: center;
+}
+
+#floating-panel {
+    padding-bottom: 10px;
+}

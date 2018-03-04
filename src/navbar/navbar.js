@@ -10,7 +10,8 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from 'reactstrap';
 import Signin from '../signin/signin';
 import Signup from '../signup/signup';
 import "./navbar.css";
@@ -20,11 +21,11 @@ export default class Navbar2 extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.signIn=this.signIn.bind(this)
-    this.logOut=this.logOut.bind(this);
+    this.signIn = this.signIn.bind(this)
+    this.logOut = this.logOut.bind(this);
     this.state = {
       isOpen: false,
-      test:"test"
+      test: "test"
     };
   }
   signIn() {
@@ -65,20 +66,20 @@ export default class Navbar2 extends React.Component {
               <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              <UncontrolledDropdown id="navBarThing" nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
                 <DropdownMenu >
                   <DropdownItem>
-                    <Signup/>
+                    <Signup />
                   </DropdownItem>
                   <DropdownItem>
-                    <Signin signIn = {this.props.signIn} signInCheck={this.props.signInCheck}/>
+                    <Signin signIn={this.props.signIn} signInCheck={this.props.signInCheck} />
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <button onClick={this.logOut}>Log Out</button>
+                    <button id="logOutBtn" onClick={this.logOut}>Log Out</button>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

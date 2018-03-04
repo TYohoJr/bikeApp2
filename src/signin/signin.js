@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import axios from "axios";
 import "./signin.css";
 
 export default class Signin extends React.Component {
@@ -33,7 +32,7 @@ export default class Signin extends React.Component {
 
   toggleNested() {
     // axios.post('/signInData', { username: this.state.username, password: this.state.password }).then((result) => {
-     this.props.signIn(this.state.username, this.state.password).then((result)=>{
+    this.props.signIn(this.state.username, this.state.password).then((result) => {
       this.setState({
         signInMessage: result.data,
         nestedModal: !this.state.nestedModal,
@@ -43,7 +42,7 @@ export default class Signin extends React.Component {
           password: ''
         }
       });
-     })
+    })
   }
 
   toggleAll() {
@@ -66,30 +65,34 @@ export default class Signin extends React.Component {
   }
 
   render() {
-    console.log(this.props.signInCheck)
     return (
       <div>
-        <Button onClick={this.toggle}>Sign In{this.props.buttonLabel}
+        <Button id="signInBtn" onClick={this.toggle}>Sign In{this.props.buttonLabel}
         </Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal id="signInModal" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Welcome!</ModalHeader>
           <ModalBody>
-            <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.onUserChange} />
-            <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
-            <br />
-            <Button color="success" onClick={this.toggleNested}>Sign In</Button>
+            <div id="inputFieldsSignIn">
+              <b className="usernameText">Username:</b><br />
+              <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.onUserChange} />
+              <br />
+              <br />
+              <b>Password:</b>
+              <br />
+              <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
+              <br />
+            </div>
+            {/* <Button color="success" onClick={this.toggleNested}>Sign In</Button> */}
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>{this.state.signInMessage}</ModalHeader>
-              {/* <ModalBody>Stuff and things</ModalBody> */}
               <ModalFooter>
-                {/* <Button color="primary" onClick={this.toggleNested}>Done</Button>{' '} */}
                 <Button color="secondary" onClick={this.toggleAll}>Ok</Button>
               </ModalFooter>
             </Modal>
           </ModalBody>
           <ModalFooter>
-            {/* <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '} */}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="success" onClick={this.toggleNested}>Sign In</Button>
+            {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
           </ModalFooter>
         </Modal>
       </div>

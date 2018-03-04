@@ -1,0 +1,16 @@
+#signUpBtn {
+    width: 80px;
+    text-align: center;
+}
+
+#inputFieldsSignUp {
+    position:relative;
+}
+
+#signUpModal{
+    width:220px;
+}
+
+.usernameText {
+    color: rgb(49, 49, 49)
+}

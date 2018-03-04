@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding-bottom: 100px;
 }
 
 .App-logo {
@@ -20,9 +21,18 @@
 
 .App-intro {
   font-size: large;
+  padding-top: 10px;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#googleFooter {
+  position:relative;
+  margin-top: -100px;
+  height: 100px;
+  text-align: center;
+}
+

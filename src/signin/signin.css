@@ -1,0 +1,16 @@
+#signInBtn {
+    width: 80px;
+    text-align: center;
+}
+
+#inputFieldsSignIn {
+    position:relative;
+}
+
+#signInModal{
+    width:220px;
+}
+
+.usernameText {
+    color: rgb(49, 49, 49)
+}
