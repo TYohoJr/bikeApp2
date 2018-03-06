@@ -42,8 +42,6 @@ export default class Signup extends React.Component {
     if (this.state.password === this.state.password2) {
       if (this.state.nestedModal === false) {
         axios.post('/signUpData', { username: this.state.username, password: this.state.password, work: this.state.work }).then((result) => {
-
-
           this.props.signIn(this.state.username, this.state.password).then((result) => {
             this.setState({
               style: {
@@ -59,27 +57,14 @@ export default class Signup extends React.Component {
               }
             });
           })
-
-
-          // this.setState({
-          //   message: result.data,
-          //   style: {
-          //     color: "black"
-          //   },
-          //   nestedModal: !this.state.nestedModal,
-          //   closeAll: false,
-          //     username: '',
-          //     password: '',
-          //     work: ""
-          // });
         })
       } else {
         this.setState({
           nestedModal: !this.state.nestedModal,
           closeAll: false,
-            username: '',
-            password: '',
-            work: ""
+          username: '',
+          password: '',
+          work: ""
         });
       }
     } else {
@@ -90,9 +75,9 @@ export default class Signup extends React.Component {
         },
         nestedModal: !this.state.nestedModal,
         closeAll: false,
-          username: '',
-          password: '',
-          work: ""
+        username: '',
+        password: '',
+        work: ""
       });
     }
   }

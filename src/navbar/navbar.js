@@ -23,7 +23,7 @@ export default class Navbar2 extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.signIn = this.signIn.bind(this)
     this.logOut = this.logOut.bind(this);
-    
+
     this.state = {
       isOpen: false,
       test: "test"
@@ -67,7 +67,7 @@ export default class Navbar2 extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu >
                   <DropdownItem>
-                    <Signup signIn={this.props.signIn} signInCheck={this.props.signInCheck}/>
+                    <Signup signIn={this.props.signIn} signInCheck={this.props.signInCheck} />
                   </DropdownItem>
                   <DropdownItem>
                     <Signin signIn={this.props.signIn} signInCheck={this.props.signInCheck} />

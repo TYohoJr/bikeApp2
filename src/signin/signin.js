@@ -65,8 +65,8 @@ export default class Signin extends React.Component {
     });
   }
 
-  showPassword(){
-    if(this.state.passwordType === "password"){
+  showPassword() {
+    if (this.state.passwordType === "password") {
       this.setState({
         passwordType: "text"
       })
@@ -94,9 +94,8 @@ export default class Signin extends React.Component {
               <br />
               <input type={this.state.passwordType} name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
               <br />
-              <p><input type="checkbox" onClick={this.showPassword}/> Show password</p>
+              <p><input type="checkbox" onClick={this.showPassword} /> Show password</p>
             </div>
-            {/* <Button color="success" onClick={this.toggleNested}>Sign In</Button> */}
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>{this.state.signInMessage}</ModalHeader>
               <ModalFooter>
@@ -106,7 +105,6 @@ export default class Signin extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={this.toggleNested}>Sign In</Button>
-            {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
           </ModalFooter>
         </Modal>
       </div>

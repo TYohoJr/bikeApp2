@@ -50,9 +50,6 @@ export default class Map extends Component {
     };
     document.getElementById('start').addEventListener('change', onChangeHandler);
     document.getElementById('end').addEventListener('change', onChangeHandler);
-
-
-
   }
 
   findRoute() {
@@ -109,4 +106,3 @@ export default class Map extends Component {
     )
   }
 }
-
