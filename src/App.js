@@ -18,7 +18,8 @@ export default class App extends Component {
   signIn(username, password) {
     return new Promise((resolve, reject) => {
       axios.post('/signInData', { username: username, password: password }).then((result) => {
-        if (result.data === 'Login successful!') {
+        if (result.data.message === 'Login successful!') {
+          localStorage.setItem('token', result.data.myToken);
           this.setState({
             isMapPresent: true
           })
@@ -34,7 +35,6 @@ export default class App extends Component {
       map = <Map />
       document.getElementById("signInText").innerHTML = "";
     }
-
     return (
       <div>
         <Navbar2 signIn={this.signIn} signInCheck={this.state.signInCheck} />

@@ -15,10 +15,13 @@ export default class Signup extends React.Component {
       username: '',
       password: '',
       password2: "",
+      work: "",
       message: "placeholder",
       style: {
         color: "black"
-      }
+      },
+      signInMessage: "",
+      signInCheck: false,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -26,6 +29,7 @@ export default class Signup extends React.Component {
     this.toggleAll = this.toggleAll.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onWorkChange = this.onWorkChange.bind(this);
   }
 
   toggle() {
@@ -37,28 +41,45 @@ export default class Signup extends React.Component {
   toggleNested() {
     if (this.state.password === this.state.password2) {
       if (this.state.nestedModal === false) {
-        axios.post('/signUpData', { username: this.state.username, password: this.state.password }).then((result) => {
-          this.setState({
-            message: result.data,
-            style: {
-              color: "black"
-            },
-            nestedModal: !this.state.nestedModal,
-            closeAll: false,
-            userData: {
-              username: '',
-              password: '',
-            }
-          });
+        axios.post('/signUpData', { username: this.state.username, password: this.state.password, work: this.state.work }).then((result) => {
+
+
+          this.props.signIn(this.state.username, this.state.password).then((result) => {
+            this.setState({
+              style: {
+                color: "black"
+              },
+              signInMessage: result.data.message,
+              message: result.data.message,
+              nestedModal: !this.state.nestedModal,
+              closeAll: false,
+              userData: {
+                username: '',
+                password: ''
+              }
+            });
+          })
+
+
+          // this.setState({
+          //   message: result.data,
+          //   style: {
+          //     color: "black"
+          //   },
+          //   nestedModal: !this.state.nestedModal,
+          //   closeAll: false,
+          //     username: '',
+          //     password: '',
+          //     work: ""
+          // });
         })
       } else {
         this.setState({
           nestedModal: !this.state.nestedModal,
           closeAll: false,
-          userData: {
             username: '',
             password: '',
-          }
+            work: ""
         });
       }
     } else {
@@ -69,10 +90,9 @@ export default class Signup extends React.Component {
         },
         nestedModal: !this.state.nestedModal,
         closeAll: false,
-        userData: {
           username: '',
           password: '',
-        },
+          work: ""
       });
     }
   }
@@ -109,6 +129,12 @@ export default class Signup extends React.Component {
     });
   }
 
+  onWorkChange = (e) => {
+    this.setState({
+      work: (e.target.value)
+    });
+  }
+
   render() {
     return (
       <div >
@@ -126,6 +152,9 @@ export default class Signup extends React.Component {
               <input id="passwordInput" type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange} />
               <br />
               <input id="password2Input" type="password" name="password2" placeholder="Re-enter password" value={this.state.password2} onChange={this.onPassword2Change} />
+              <br />
+              <b>Work Address</b>
+              <input id="workAddress" type="text" name="work" placeholder="Work Address" value={this.state.work} onChange={this.onWorkChange} />
               <br />
             </div>
             <Modal style={this.state.style} isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>

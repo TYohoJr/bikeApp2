@@ -23,6 +23,7 @@ export default class Navbar2 extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.signIn = this.signIn.bind(this)
     this.logOut = this.logOut.bind(this);
+    
     this.state = {
       isOpen: false,
       test: "test"
@@ -60,19 +61,13 @@ export default class Navbar2 extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
-              </NavItem>
               <UncontrolledDropdown id="navBarThing" nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
                 <DropdownMenu >
                   <DropdownItem>
-                    <Signup />
+                    <Signup signIn={this.props.signIn} signInCheck={this.props.signInCheck}/>
                   </DropdownItem>
                   <DropdownItem>
                     <Signin signIn={this.props.signIn} signInCheck={this.props.signInCheck} />

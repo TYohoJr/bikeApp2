@@ -1,43 +1,68 @@
 import React, { Component } from 'react';
-import "./maps.css"
+import "./maps.css";
+import axios from 'axios';
 
 const google = window.google;
 var map, infoWindow;
 var pos
 
 export default class Map extends Component {
+  constructor() {
+    super();
+    this.state = {
+      work: '',
+    }
+
+    this.findRoute = this.findRoute.bind(this);
+    this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
+    this.directionsService = new google.maps.DirectionsService();
+    this.directionsDisplay = new google.maps.DirectionsRenderer();
+
+  }
+
+  calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+      origin: { lat: pos.lat, lng: pos.lng },
+      destination: document.getElementById('end').value,
+      travelMode: 'BICYCLING'
+    }, function (response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
+
   componentDidMount() {
-    var directionsService = new google.maps.DirectionsService();
-    var directionsDisplay = new google.maps.DirectionsRenderer();
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
-      center: { lat: 41.85, lng: -87.65 }
+      center: { lat: 45.676998, lng: -111.042931 }
     });
     var bikeLayer = new google.maps.BicyclingLayer();
     bikeLayer.setMap(map);
-    directionsDisplay.setMap(map);
+    this.directionsDisplay.setMap(map);
 
     var onChangeHandler = function () {
-      calculateAndDisplayRoute(directionsService, directionsDisplay);
+      this.calculateAndDisplayRoute(this.directionsService, this.directionsDisplay);
       var bikeLayer = new google.maps.BicyclingLayer();
       bikeLayer.setMap(map);
     };
     document.getElementById('start').addEventListener('change', onChangeHandler);
     document.getElementById('end').addEventListener('change', onChangeHandler);
 
-    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-      directionsService.route({
-        origin: { lat: pos.lat, lng: pos.lng },
-        destination: document.getElementById('end').value,
-        travelMode: 'BICYCLING'
-      }, function (response, status) {
-        if (status === 'OK') {
-          directionsDisplay.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to ' + status);
-        }
-      });
-    }
+
+
+  }
+
+  findRoute() {
+    axios.post('/findRoute', { token: localStorage.getItem("token") }).then((result) => {
+      this.setState({
+        work: result.data[0].work
+      })
+      document.getElementById('end').value = this.state.work;
+      this.calculateAndDisplayRoute(this.directionsService, this.directionsDisplay)
+    })
   }
 
   render() {
@@ -73,10 +98,11 @@ export default class Map extends Component {
     return (
       <div>
         <div id="floating-panel">
+          <button onClick={this.findRoute}>Get me to work!</button>
           <b>Start: </b>
           <p id="start">Your Location</p>
-          <b>End: </b><br/>
-          <input id="end" type="text" placeholder="Enter your work" />
+          <b>End: </b><br />
+          <p id="end">{this.state.work}</p>
         </div>
         <div id="map"></div>
       </div>
