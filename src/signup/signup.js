@@ -20,15 +20,14 @@ export default class Signup extends React.Component {
       style: {
         color: "black"
       },
-      signInMessage: "",
       signInCheck: false,
     };
-
     this.toggle = this.toggle.bind(this);
     this.toggleNested = this.toggleNested.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
     this.onUserChange = this.onUserChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onPassword2Change = this.onPassword2Change.bind(this);
     this.onWorkChange = this.onWorkChange.bind(this);
   }
 
@@ -47,7 +46,6 @@ export default class Signup extends React.Component {
               style: {
                 color: "black"
               },
-              signInMessage: result.data.message,
               message: result.data.message,
               nestedModal: !this.state.nestedModal,
               closeAll: false,
@@ -75,9 +73,8 @@ export default class Signup extends React.Component {
         },
         nestedModal: !this.state.nestedModal,
         closeAll: false,
-        username: '',
-        password: '',
-        work: ""
+        password: "",
+        password2: ""
       });
     }
   }

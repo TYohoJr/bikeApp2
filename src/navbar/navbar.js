@@ -5,8 +5,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -50,7 +48,11 @@ export default class Navbar2 extends React.Component {
   }
 
   logOut() {
-    window.location.href = '/xx'
+    localStorage.clear();
+    this.setState({
+      isMapPresent:false
+    })
+    // window.location.href = '/xx'
   }
 
   render() {

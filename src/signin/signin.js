@@ -34,23 +34,29 @@ export default class Signin extends React.Component {
 
   toggleNested() {
     this.props.signIn(this.state.username, this.state.password).then((result) => {
+      console.log(result)
       this.setState({
         signInMessage: result.data.message,
         nestedModal: !this.state.nestedModal,
         closeAll: false,
-        userData: {
-          username: '',
-          password: ''
-        }
+        username: '',
+        password: ''
       });
     })
   }
 
   toggleAll() {
+    if(this.state.signInMessage === "Login successful!"){
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: true
     });
+  } else {
+    this.setState({
+      nestedModal: !this.state.nestedModal,
+      // closeAll: true
+    });
+  }
   }
 
   onUserChange = (e) => {
