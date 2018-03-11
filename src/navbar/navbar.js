@@ -20,8 +20,6 @@ export default class Navbar2 extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.signIn = this.signIn.bind(this)
-    this.logOut = this.logOut.bind(this);
-
     this.state = {
       isOpen: false,
       test: "test"
@@ -47,25 +45,19 @@ export default class Navbar2 extends React.Component {
     });
   }
 
-  logOut() {
-    localStorage.clear();
-    this.setState({
-      isMapPresent:false
-    })
-    // window.location.href = '/xx'
-  }
+
 
   render() {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">Biking Hector</NavbarBrand>
+          <NavbarBrand href="/">Bike App</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown id="navBarThing" nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  Sign Up/In
                 </DropdownToggle>
                 <DropdownMenu >
                   <DropdownItem>
@@ -76,7 +68,7 @@ export default class Navbar2 extends React.Component {
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    <button id="logOutBtn" onClick={this.logOut}>Log Out</button>
+                    <button id="logOutBtn" onClick={this.props.logOut}>Log Out</button>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

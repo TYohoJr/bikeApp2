@@ -28,11 +28,3 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-#googleFooter {
-  position:relative;
-  margin-top: -100px;
-  height: 100px;
-  text-align: center;
-}
-
